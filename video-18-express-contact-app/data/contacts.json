@@ -1,0 +1,56 @@
+[
+  {
+    "id": "C001",
+    "name": "Romi Amirudin",
+    "email": "romiamir@gmail.com",
+    "phoneNumber": "081233444566"
+  },
+  {
+    "id": "C002",
+    "name": "Doni Priambada",
+    "email": "dontjustpri@outlook.com",
+    "phoneNumber": "088986844789"
+  },
+  {
+    "id": "C003",
+    "name": "Chia Sari",
+    "email": "chikasari@gmail.com",
+    "phoneNumber": "081232455654"
+  },
+  {
+    "id": "C004",
+    "name": "Deni Darmawanto",
+    "email": "denidarma@hotmail.com",
+    "phoneNumber": "082343511900"
+  },
+  {
+    "id": "C005",
+    "name": "Erfano Moratta",
+    "email": "erfano000@gmail.com",
+    "phoneNumber": "082333453786"
+  },
+  {
+    "id": "C006",
+    "name": "Hardi Purnomo",
+    "email": "hadi.pur@gmail.com",
+    "phoneNumber": "081233456432"
+  },
+  {
+    "id": "C007",
+    "name": "Farahatun Nadziroh",
+    "email": "farahat@mail.com",
+    "phoneNumber": "0888999888756"
+  },
+  {
+    "id": "C008",
+    "name": "Genia Germanium",
+    "email": "genium@yahoo.com",
+    "phoneNumber": "082344562783"
+  },
+  {
+    "id": "C009",
+    "name": "Ida Inayah",
+    "email": "idainayah@hotmail.com",
+    "phoneNumber": "088231453788"
+  }
+]
