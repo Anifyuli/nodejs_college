@@ -1,6 +1,7 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import { body, validationResult } from "express-validator";
+import methodOverride from "method-override";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import flash from "connect-flash";
@@ -10,6 +11,8 @@ import {
   findContact,
   addContact,
   checkDuplicity,
+  deleteContact,
+  updateContacts,
 } from "./utils/contacts.js";
 
 const app = express();
@@ -26,6 +29,8 @@ app.use(express.static("public"));
 
 // Midleware untuk data parsing
 app.use(express.urlencoded({ extended: true }));
+
+app.use(methodOverride("_method"));
 
 app.use(cookieParser("secret"));
 app.use(
@@ -102,9 +107,50 @@ app.delete("/contact/delete/:id", (req, res) => {
     res.status(404);
     res.send("<h1> Error 404 : Contact not found </h1>");
   } else {
-    res.send("Ok");
+    deleteContact(req.params.id);
+    req.flash("msg", "Contact deleted successfully!");
+    return res.redirect("/contact");
   }
 });
+
+app.get("/contact/edit/:id", (req, res) => {
+  const contact = findContact(req.params.id);
+  res.render("edit", {
+    title: "Edit contact",
+    layout: "partials/main",
+    contact,
+  });
+});
+
+app.post(
+  "/contact/update",
+  [
+    body("name").custom((value, { req }) => {
+      const duplicated = checkDuplicity(value);
+      if (value !== req.body.oldName && duplicated) {
+        throw new Error("Name already saved!");
+      }
+      return true;
+    }),
+    body("email", "Email is invalid").isEmail(),
+    body("phoneNumber", "Phone number is invalid").isMobilePhone("id-ID"),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("edit", {
+        title: "Edit contact",
+        layout: "partials/main",
+        errors: errors.array(),
+        contact: req.body,
+      });
+    } else {
+      updateContacts(req.body);
+      req.flash("msg", "Contact edited successfully!");
+      res.redirect("/contact");
+    }
+  }
+);
 
 app.get("/contact/:id", (req, res) => {
   const contact = findContact(req.params.id);

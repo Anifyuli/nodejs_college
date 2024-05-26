@@ -16,8 +16,8 @@
         <p class="card-text"><%= contact.phoneNumber %></p>
         <div class="col mb-2">
           <form
-            action="/contact/delete/<%= contact.id %>"
-            method="GET"
+            action="/contact/delete/<%= contact.id %>?_method=DELETE"
+            method="POST"
             onsubmit="return confirm('Are you sure?');"
           >
             <input type="hidden" name="_method" value="DELETE" />
@@ -27,7 +27,7 @@
           </form>
         </div>
         <div class="col">
-          <a href="/contact/edit" class="btn btn-sm btn-primary mx-1">Edit</a>
+          <a href="/contact/edit/<%= contact.id %>" class="btn btn-sm btn-primary mx-1">Edit</a>
         </div>
         <div class="col">
           <a href="/contact" class="card-link m-2 d-block"
